@@ -8,6 +8,22 @@
     <title>Rijks-Met Collaboration</title>
   </head>
   <body>
-    <script type="text/javascript" src="./src/script.js"></script>
+    <main>
+      <form id="query-form">
+        <!-- <select class="departments-list">
+      <option value="">-- Searching in specific department?</option>
+    </select> -->
+        <input
+          type="text"
+          id="main-search"
+          placeholder="Add a keyword to search ..."
+        />
+        <!-- <input type="text" id="by-artist" placeholder="Artist">
+    <input type="text" id="by-title" placeholder="The artwork title"> -->
+        <input type="submit" class="button" value="Search" />
+      </form>
+      <section id="search-results"></section>
+    </main>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
