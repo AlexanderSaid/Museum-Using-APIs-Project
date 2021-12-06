@@ -1,8 +1,31 @@
+@font-face {
+  font-family: RijksText;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://rijks-web-2012.azureedge.net/v-15f9886faef52c3c8edc26805f6d445e/WebStatic/Fonts/Rijksmuseum-Normal.woff2")
+      format("woff2"),
+    url("https://rijks-web-2012.azureedge.net/v-6088fca1293f7aa2e1de3bb82bbbee13/WebStatic/Fonts/Rijksmuseum-Normal.woff")
+      format("woff");
+}
+@font-face {
+  font-family: RijksText;
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://rijks-web-2012.azureedge.net/v-b20fc1732520a2948ce209326b4e1367/WebStatic/Fonts/Rijksmuseum-Bold.woff2")
+      format("woff2"),
+    url("https://rijks-web-2012.azureedge.net/v-bee6c69ccdea5ecffe660ab37692eac8/WebStatic/Fonts/Rijksmuseum-Bold.woff")
+      format("woff");
+}
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 body {
+  font-family: RijksText, Arial, sans-serif;
+  font-size: 16px;
 }
 #query-form {
 }
@@ -13,31 +36,75 @@ body {
 #search-results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  column-gap: 20px;
+  row-gap: 40px;
 }
 .artwork {
+  height: 270px;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+}
+.img-container {
+  width: 100%;
+  height: 200px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 400px;
-  width: 400px;
-  display: flex;
-  align-items: flex-end;
 }
-.artwork-info {
+
+.artwork-info-container {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-}
-a {
+  align-items: flex-start;
+  width: 100%;
+  height: 100px;
 }
 .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+.artwork-title {
+  max-width: 90%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a {
+  vertical-align: middle;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 .artwork-date {
+  color: #a2abad;
+  font-size: 0.6rem;
 }
 .artist-name {
+  color: #343537;
+  font-size: 0.7rem;
 }
+
 .name-or-culture {
+  background-color: #aaa04d;
+  font-size: 0.5rem;
+  font-weight: normal;
+  color: white;
+  padding: 3px 7px;
+  width: fit-content;
+  border-radius: 3px;
 }
