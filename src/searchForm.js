@@ -1,3 +1,4 @@
+"use strict";
 export function setSearchFocus() {
-  document.getElementById('main-search').focus();
+  document.getElementById("main-term").focus();
 }

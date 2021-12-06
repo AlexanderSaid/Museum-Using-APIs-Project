@@ -1,3 +1,5 @@
+"use strict";
+
 export function createResultsElement(resultsArray) {
   const resultsContainer = document.querySelector("#search-results");
   resultsArray.forEach((artwork) => {
@@ -5,7 +7,6 @@ export function createResultsElement(resultsArray) {
     artworkContainer.classList.add("artwork");
     if (artwork.image) {
       artworkContainer.style.backgroundImage = `url(${artwork.image})`;
-      artworkContainer.style.width = '200px';
     }
     const artworkInfo = createItemInfoElement(artwork);
     artworkContainer.appendChild(artworkInfo);
@@ -20,8 +21,9 @@ function createItemInfoElement(artwork) {
   const titleContainer = document.createElement("div");
   const title = document.createElement("a");
   titleContainer.appendChild(title);
-  a.href = artwork.objectURL;
-  a.textContent = artwork.title;
+  title.href = artwork.objectURL;
+  title.textContent = artwork.title;
+  title.target = "_blank";
   const info = document.createElement("div");
   info.classList.add("info");
   const date = document.createElement("p");
@@ -34,12 +36,14 @@ function createItemInfoElement(artwork) {
   if (artwork.artist) {
     artist.textContent = `By: ${artwork.artist}`;
   }
-  const nameAndCulture = document.createElement("p");
-  nameAndCulture.classList.add("name-culture");
-  nameAndCulture.textContent = `${artwork.objectName}, ${artwork.culture}`;
+  const nameOrCulture = document.createElement("p");
+  nameOrCulture.classList.add("name-or-culture");
+  nameOrCulture.textContent = artwork.culture
+    ? `${artwork.objectName} - ${artwork.culture}`
+    : `${artwork.objectName}`;
   info.appendChild(date);
   info.appendChild(artist);
-  info.appendChild(nameAndCulture);
+  info.appendChild(nameOrCulture);
   artworkInfo.appendChild(titleContainer);
   artworkInfo.appendChild(info);
   return artworkInfo;

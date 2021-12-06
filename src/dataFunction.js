@@ -1,5 +1,8 @@
+"use strict";
+
+let endSlice;
 export function getSearchTerm() {
-  const searchInput = document.querySelector("#main-search").value.trim();
+  const searchInput = document.querySelector("#main-term").value.trim();
   return searchInput;
 }
 async function getRawData(searchInput) {
@@ -13,24 +16,27 @@ export async function retrieveSearchResults(searchInput) {
     const resultsArray = [];
     const objectIDsArray = await getRawData(searchInput);
     if (objectIDsArray.length) {
-      objectIDsArray.forEach(async (id) => {
+      endSlice =
+        objectIDsArray.length > 20 ? (endSlice = 20) : objectIDsArray.length;
+      const promises = objectIDsArray.slice(0, endSlice).map(async (id) => {
         const itemURL = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`;
-        const artworkData = await fetchData(itemURL);
-        const objectName = artworkData.objectName.length
-          ? artworkData.objectName
+        return fetchData(itemURL);
+      });
+      const artworks = await Promise.all(promises);
+      console.log(artworks);
+      artworks.forEach((artwork) => {
+        const id = artwork.objectID;
+        const objectName = artwork.objectName.length ? artwork.objectName : "";
+        const title = artwork.title;
+        const date = artwork.objectDate.length ? artwork.objectDate : "";
+        const artist = artwork.artistDisplayName.length
+          ? artwork.artistDisplayName
           : "";
-        const title = artworkData.title;
-        const date = artworkData.objectDate.length
-          ? artworkData.objectDate
+        const culture = artwork.culture.length ? artwork.culture : "";
+        const imageSrc = artwork.primaryImageSmall.length
+          ? artwork.primaryImageSmall
           : "";
-        const artist = artworkData.artistDisplayName.length
-          ? artworkData.artistDisplayName
-          : "";
-        const culture = artworkData.culture.length ? artworkData.culture : "";
-        const imageSrc = artworkData.primaryImageSmall.length
-          ? artworkData.primaryImageSmall
-          : "";
-        const objectURL = artworkData.objectURL;
+        const objectURL = artwork.objectURL;
         const item = {
           id: id,
           objectName: objectName,
@@ -44,6 +50,7 @@ export async function retrieveSearchResults(searchInput) {
         resultsArray.push(item);
       });
     }
+    console.log(resultsArray);
     return resultsArray;
   } catch (error) {
     console.error(error.stack);
@@ -51,7 +58,7 @@ export async function retrieveSearchResults(searchInput) {
 }
 
 function getSearchUrl(searchInput) {
-  const searchString = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${searchInput}`;
+  const searchString = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${searchInput}`;
   const searchURL = encodeURI(searchString);
   return searchURL;
 }
@@ -63,4 +70,3 @@ export async function fetchData(url) {
   }
   return response.json();
 }
-
