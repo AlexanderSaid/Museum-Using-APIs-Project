@@ -5,20 +5,32 @@ export function createResultsElement(resultsArray) {
   resultsArray.forEach((artwork) => {
     const artworkContainer = document.createElement("div");
     artworkContainer.classList.add("artwork");
-    if (artwork.image) {
-      artworkContainer.style.backgroundImage = `url(${artwork.image})`;
-    }
+    const imgElement = createImageElement(artwork);
     const artworkInfo = createItemInfoElement(artwork);
+    artworkContainer.appendChild(imgElement);
     artworkContainer.appendChild(artworkInfo);
     resultsContainer.appendChild(artworkContainer);
   });
   return resultsContainer;
 }
-
+function createImageElement(artwork) {
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("img-container");
+  const copyRight = document.createElement("span");
+  copyRight.classList.add("copy-right");
+  copyRight.textContent = "This image is not available because of copyright";
+  if (artwork.image) {
+    imgContainer.style.backgroundImage = `url(${artwork.image})`;
+  } else {
+    imgContainer.appendChild(copyRight);
+  }
+  return imgContainer;
+}
 function createItemInfoElement(artwork) {
-  const artworkInfo = document.createElement("div");
-  artworkInfo.classList.add("artwork-info");
+  const artworkInfoContainer = document.createElement("div");
+  artworkInfoContainer.classList.add("artwork-info-container");
   const titleContainer = document.createElement("div");
+  titleContainer.classList.add('artwork-title');
   const title = document.createElement("a");
   titleContainer.appendChild(title);
   title.href = artwork.objectURL;
@@ -44,7 +56,7 @@ function createItemInfoElement(artwork) {
   info.appendChild(date);
   info.appendChild(artist);
   info.appendChild(nameOrCulture);
-  artworkInfo.appendChild(titleContainer);
-  artworkInfo.appendChild(info);
-  return artworkInfo;
+  artworkInfoContainer.appendChild(titleContainer);
+  artworkInfoContainer.appendChild(info);
+  return artworkInfoContainer;
 }
