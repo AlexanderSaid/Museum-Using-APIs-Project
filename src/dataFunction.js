@@ -23,7 +23,6 @@ export async function retrieveSearchResults(searchInput) {
         return fetchData(itemURL);
       });
       const artworks = await Promise.all(promises);
-      console.log(artworks);
       artworks.forEach((artwork) => {
         const id = artwork.objectID;
         const objectName = artwork.objectName.length ? artwork.objectName : "";

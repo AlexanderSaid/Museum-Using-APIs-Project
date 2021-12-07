@@ -1,5 +1,12 @@
 "use strict";
-
+export function clearSearchResults() {
+  const resultsContainer = document.getElementById('search-results');
+  let  artwork =  resultsContainer.lastElementChild;
+  while (artwork) {
+    resultsContainer.removeChild(artwork);
+    artwork = resultsContainer.lastElementChild;
+  }
+}
 export function createResultsElement(resultsArray) {
   const resultsContainer = document.querySelector("#search-results");
   resultsArray.forEach((artwork) => {

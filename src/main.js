@@ -1,7 +1,7 @@
 "use strict";
 import { setSearchFocus } from "./searchForm.js";
 import { getSearchTerm, retrieveSearchResults } from "./dataFunction.js";
-import { createResultsElement } from "./resultsView.js";
+import { clearSearchResults, createResultsElement } from "./resultsView.js";
 const SEARCH_URL =
   "https://collectionapi.metmuseum.org/public/collection/v1/search?q=";
 const GET_OBJECT_URL =
@@ -11,6 +11,7 @@ const GET_DEPARTMENTS_URL =
 
 function submitTheSearch(event) {
   event.preventDefault();
+  clearSearchResults();
   processTheSearch();
   setSearchFocus();
 }
