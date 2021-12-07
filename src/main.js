@@ -2,21 +2,16 @@
 import { setSearchFocus, handleInputField } from "./searchForm.js";
 import {
   getSearchTerm,
-  retrieveSearchResults,
-  retrieveMoreResults,
+  getRawData,
+  retrieveResults,
+  leftResultsArray,
 } from "./dataFunction.js";
 import {
   clearSearchResults,
   createResultsElement,
   createLoadMoreButton,
+  createNoResultsMessage,
 } from "./resultsView.js";
-import { leftResultsArray } from "./data.js";
-const SEARCH_URL =
-  "https://collectionapi.metmuseum.org/public/collection/v1/search?q=";
-const GET_OBJECT_URL =
-  "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-const GET_DEPARTMENTS_URL =
-  "https://collectionapi.metmuseum.org/public/collection/v1/departments";
 
 function submitTheSearch(event) {
   event.preventDefault();
@@ -26,13 +21,35 @@ function submitTheSearch(event) {
   clearSearchResults();
   processTheSearch();
 }
-export async function loadMoreResults(event) {
-  // event.preventDefault();
-  const moreResultsArray = await retrieveMoreResults();
+
+async function processTheSearch() {
+  const searchTerm = getSearchTerm();
+  if (!searchTerm) return;
+  const rawResults = await getRawData(searchTerm);
+  if (!rawResults) {
+    createNoResultsMessage();
+    return;
+  }
+  const resultsArray = await retrieveResults();
+  if (resultsArray.length) {
+    createResultsElement(resultsArray);
+  }
+  createLoadMoreButton();
+}
+
+export async function loadMoreResults() {
+  const moreResultsArray = await retrieveResults();
   if (moreResultsArray.length) {
     createResultsElement(moreResultsArray);
   }
+
+  if (!leftResultsArray.length) {
+    const loadMoreButton = document.getElementById("load-more");
+    loadMoreButton.setAttribute("disabled", "disabled");
+    loadMoreButton.textContent = 'No more results';
+  }
 }
+
 function initApp() {
   setSearchFocus();
   const form = document.querySelector("#query-form");
@@ -40,14 +57,6 @@ function initApp() {
   handleInputField();
 }
 
-async function processTheSearch() {
-  const searchTerm = getSearchTerm();
-  if (!searchTerm) return;
-  const resultsArray = await retrieveSearchResults(searchTerm);
-  if (resultsArray.length) {
-    createResultsElement(resultsArray);
-  }
-  createLoadMoreButton();
-}
+
 
 window.addEventListener("load", initApp);

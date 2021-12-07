@@ -1,5 +1,6 @@
 "use strict";
 import { loadMoreResults } from "./main.js";
+
 export function clearSearchResults() {
   const resultsContainer = document.getElementById("search-results");
   let artwork = resultsContainer.lastElementChild;
@@ -77,4 +78,11 @@ export function createLoadMoreButton() {
   loadMoreButton.textContent = "Show More";
   mainElement.appendChild(loadMoreButton);
   loadMoreButton.addEventListener("click", loadMoreResults);
+}
+export function createNoResultsMessage() {
+  const resultsContainer = document.getElementById("search-results");
+  const noResultsMessage = document.createElement("p");
+  noResultsMessage.id = "no-results";
+  noResultsMessage.textContent = "No results match your search!";
+  resultsContainer.appendChild(noResultsMessage);
 }
