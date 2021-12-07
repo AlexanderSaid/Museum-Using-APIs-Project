@@ -1,7 +1,8 @@
 "use strict";
+import { loadMoreResults } from "./main.js";
 export function clearSearchResults() {
-  const resultsContainer = document.getElementById('search-results');
-  let  artwork =  resultsContainer.lastElementChild;
+  const resultsContainer = document.getElementById("search-results");
+  let artwork = resultsContainer.lastElementChild;
   while (artwork) {
     resultsContainer.removeChild(artwork);
     artwork = resultsContainer.lastElementChild;
@@ -37,7 +38,7 @@ function createItemInfoElement(artwork) {
   const artworkInfoContainer = document.createElement("div");
   artworkInfoContainer.classList.add("artwork-info-container");
   const titleContainer = document.createElement("div");
-  titleContainer.classList.add('artwork-title');
+  titleContainer.classList.add("artwork-title");
   const title = document.createElement("a");
   titleContainer.appendChild(title);
   title.href = artwork.objectURL;
@@ -66,4 +67,14 @@ function createItemInfoElement(artwork) {
   artworkInfoContainer.appendChild(titleContainer);
   artworkInfoContainer.appendChild(info);
   return artworkInfoContainer;
+}
+
+export function createLoadMoreButton() {
+  const mainElement = document.querySelector("main");
+  const loadMoreButton = document.createElement("button");
+  loadMoreButton.id = "load-more";
+  loadMoreButton.classList.add("button");
+  loadMoreButton.textContent = "Show More";
+  mainElement.appendChild(loadMoreButton);
+  loadMoreButton.addEventListener("click", loadMoreResults);
 }

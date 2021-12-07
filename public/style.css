@@ -3,20 +3,16 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-  src: "./Rijks-fonts/Rijksmuseum-Normal.woff2"
-      format("woff2"),
-      "./Rijks-fonts/Rijksmuseum-Normal.woff"
-      format("woff");
+  src: "./Rijks-fonts/Rijksmuseum-Normal.woff2" format("woff2"),
+    "./Rijks-fonts/Rijksmuseum-Normal.woff" format("woff");
 }
 @font-face {
   font-family: RijksText;
   font-weight: bold;
   font-style: normal;
   font-display: swap;
-  src: "./Rijks-fonts/Rijksmuseum-Bold.woff2"
-      format("woff2"),
-      "./Rijks-fonts/Rijksmuseum-Bold.woff"
-      format("woff");
+  src: "./Rijks-fonts/Rijksmuseum-Bold.woff2" format("woff2"),
+    "./Rijks-fonts/Rijksmuseum-Bold.woff" format("woff");
 }
 * {
   box-sizing: border-box;
