@@ -1,17 +1,32 @@
 "use strict";
-import { setSearchFocus, handleInputField } from "./searchForm.js";
+import { setSearchFocus, setUpInputField } from "./searchForm.js";
 import {
   getSearchTerm,
   getRawData,
   retrieveResults,
   leftResultsArray,
-} from "./dataFunction.js";
+} from "./dataFunctions.js";
 import {
   clearSearchResults,
   createResultsElement,
   createLoadMoreButton,
   createNoResultsMessage,
 } from "./resultsView.js";
+
+async function processTheSearch() {
+  const searchTerm = getSearchTerm();
+  if (!searchTerm) return;
+  const totalResults = await getRawData(searchTerm);
+  if (!totalResults) {
+    createNoResultsMessage();
+    return;
+  }
+  const resultsArray = await retrieveResults();
+  if (resultsArray) {
+    createResultsElement(resultsArray);
+    createLoadMoreButton();
+  }
+}
 
 function submitTheSearch(event) {
   event.preventDefault();
@@ -20,21 +35,6 @@ function submitTheSearch(event) {
   searchButton.setAttribute("disabled", "disabled");
   clearSearchResults();
   processTheSearch();
-}
-
-async function processTheSearch() {
-  const searchTerm = getSearchTerm();
-  if (!searchTerm) return;
-  const rawResults = await getRawData(searchTerm);
-  if (!rawResults) {
-    createNoResultsMessage();
-    return;
-  }
-  const resultsArray = await retrieveResults();
-  if (resultsArray.length) {
-    createResultsElement(resultsArray);
-  }
-  createLoadMoreButton();
 }
 
 export async function loadMoreResults() {
@@ -54,9 +54,7 @@ function initApp() {
   setSearchFocus();
   const form = document.querySelector("#search-form");
   form.addEventListener("submit", submitTheSearch);
-  handleInputField();
+  setUpInputField();
 }
-
-
 
 window.addEventListener("load", initApp);

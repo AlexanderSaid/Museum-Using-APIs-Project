@@ -1,5 +1,5 @@
 "use strict";
-
+import { createErrorMessage } from "./resultsView.js";
 export let leftResultsArray = []; // This array will store the raw results
 const endSlice = 12;
 
@@ -28,7 +28,6 @@ export async function getRawData(searchInput) {
   if (searchResults.objectIDs !== null) {
     leftResultsArray.push(...searchResults.objectIDs);
     const total = searchResults.total;
-    console.log(total);
     return total;
   }
 }
@@ -79,7 +78,6 @@ export async function retrieveResults() {
     const resultsArray = await fillResultsArray(promises);
     return resultsArray;
   } catch (error) {
-    console.log(error);
+    createErrorMessage(error.message);
   }
 }
-

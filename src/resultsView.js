@@ -9,6 +9,7 @@ export function clearSearchResults() {
     artwork = resultsContainer.lastElementChild;
   }
 }
+
 export function createResultsElement(resultsArray) {
   const resultsContainer = document.querySelector("#search-results");
   resultsArray.forEach((artwork) => {
@@ -22,6 +23,7 @@ export function createResultsElement(resultsArray) {
   });
   return resultsContainer;
 }
+
 function createImageElement(artwork) {
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("img-container");
@@ -32,9 +34,11 @@ function createImageElement(artwork) {
     imgContainer.style.backgroundImage = `url(${artwork.image})`;
   } else {
     imgContainer.appendChild(copyRight);
+    imgContainer.style.backgroundColor = "#aaa04d";
   }
   return imgContainer;
 }
+
 function createItemInfoElement(artwork) {
   const artworkInfoContainer = document.createElement("div");
   artworkInfoContainer.classList.add("artwork-info-container");
@@ -45,7 +49,7 @@ function createItemInfoElement(artwork) {
   title.href = artwork.objectURL;
   title.textContent = artwork.title;
   title.target = "_blank";
-  title.classList.add('artwork-title')
+  title.classList.add("artwork-title");
   const info = document.createElement("div");
   info.classList.add("info");
   const date = document.createElement("p");
@@ -80,10 +84,19 @@ export function createLoadMoreButton() {
   mainElement.appendChild(loadMoreButton);
   loadMoreButton.addEventListener("click", loadMoreResults);
 }
+
 export function createNoResultsMessage() {
   const resultsContainer = document.getElementById("search-results");
   const noResultsMessage = document.createElement("p");
   noResultsMessage.id = "no-results";
   noResultsMessage.textContent = "No results match your search!";
   resultsContainer.appendChild(noResultsMessage);
+}
+
+export function createErrorMessage(error) {
+  const resultsContainer = document.getElementById("search-results");
+  const errorMessage = document.createElement("p");
+  errorMessage.id = "no-results";
+  errorMessage.textContent = `${error} Try again later ...`;
+  resultsContainer.appendChild(errorMessage);
 }

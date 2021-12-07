@@ -1,9 +1,10 @@
 "use strict";
+
 export function setSearchFocus() {
   document.getElementById("main-term").focus();
 }
 
-export function handleInputField() {
+export function setUpInputField() {
   const inputField = document.getElementById("main-term");
   const searchButton = document.getElementById("search-button");
   inputField.addEventListener("mousedown", () => {
@@ -14,4 +15,3 @@ export function handleInputField() {
     }
   });
 }
-
