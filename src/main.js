@@ -52,7 +52,7 @@ export async function loadMoreResults() {
 
 function initApp() {
   setSearchFocus();
-  const form = document.querySelector("#query-form");
+  const form = document.querySelector("#search-form");
   form.addEventListener("submit", submitTheSearch);
   handleInputField();
 }

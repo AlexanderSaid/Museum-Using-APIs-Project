@@ -14,6 +14,7 @@
   src: "./Rijks-fonts/Rijksmuseum-Bold.woff2" format("woff2"),
     "./Rijks-fonts/Rijksmuseum-Bold.woff" format("woff");
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -23,29 +24,195 @@ body {
   font-family: RijksText, Arial, sans-serif;
   font-size: 16px;
 }
-#query-form {
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: lighter;
+  font-style: normal;
+  font-size: 20px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: white;
 }
-#departments-list {
+header {
+  width: 100%;
+  min-height: 260px;
+  height: 50vmin;
+  max-height: 510px;
+  background-image: url("./images/DT2134.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  padding: 20px calc(5.5vw / 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 500px;
+}
+nav,
+.nav-links {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+nav {
+  height: 50px;
+  width: 100%;
+  padding: 0 25px;
+  font-weight: 500;
+  filter: drop-shadow(-3px 2px 2px #343537);
+}
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.left-links {
+  flex: 1;
+}
+.nav-button {
+  height: 50px;
+  font-weight: 200;
+  border-radius: 2px;
+}
+.nav-button-home {
+  padding: 0 20px 0 15px;
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+  transition: 0.1s ease-out;
+}
+.nav-button-home a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-button-home:hover,
+.nav-button-home:hover a,
+.nav-button-home:hover a span {
+  background-color: #ffffff;
+  color: black;
+}
+.nav-button-tickets {
+  background-color: #d55140;
+  color: white;
+  padding: 0 15px;
+  transition: 0.2s ease-out;
+}
+.nav-button-tickets:hover,
+.nav-button-tickets:hover * {
+  background-color: white;
+  color: black;
+}
+.link-icon {
+  height: 50px;
+  width: 50px;
+}
+.link {
+  padding: 0 20px;
+  transition: 0.2s;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.rijks-met-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 50px;
+  margin-left: 10%;
+}
+.rijks-logo {
+  height: 30px;
+  filter: drop-shadow(-3px 2px 2px #343537);
+}
+.and-symbol {
+  height: 50px;
+  filter: drop-shadow(-3px 2px 2px #343537);
+}
+.met-logo {
+  height: 80px;
+  filter: drop-shadow(-3px 2px 2px #343537);
+}
+#search-container {
+  height: 200px;
+  background-color: #40474f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#search-form {
+  width: 50%;
+  border-bottom: 2px solid #c2ccce;
+  display: flex;
+  justify-content: space-between;
 }
 #main-term {
+  background-color: #40474f;
+  border: none;
+  color: #c2ccce;
+  height: 60px;
+  width: 100%;
+  font-size: 1.5rem;
+}
+#main-term:focus,
+#main-term:focus-visible,
+#main-term:focus-within {
+  outline: none;
+  background-color: #40474f;
+}
+#search-button {
+  width: 100px;
+  height: 55px;
+  background-color: #666c72;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+#search-button:hover {
+  color: black;
+  background-color: white;
+}
+#search-button:disabled {
+  color: black;
+  background-color: white;
+  cursor: none;
 }
 #search-results {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  column-gap: 20px;
-  row-gap: 40px;
+  column-gap: 40px;
+  row-gap: 60px;
+  margin: 50px 0;
 }
 .artwork {
-  height: 270px;
-  width: 270px;
+  height: 400px;
+  width: 320px;
   display: flex;
   flex-direction: column;
 }
 .img-container {
   width: 100%;
-  height: 200px;
+  height: 250px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -58,7 +225,8 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  height: 100px;
+  height: 150px;
+  padding-top: 20px;
 }
 .info {
   display: flex;
@@ -66,7 +234,7 @@ body {
   justify-content: space-evenly;
   height: 100%;
 }
-.artwork-title {
+.title-container {
   max-width: 90%;
   height: 40%;
   display: flex;
@@ -75,14 +243,14 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-a {
+.artwork-title {
   vertical-align: middle;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
   color: black;
 }
-a:hover {
+.artwork-title:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
@@ -92,15 +260,37 @@ a:hover {
 }
 .artist-name {
   color: #343537;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
 }
 
 .name-or-culture {
   background-color: #aaa04d;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   font-weight: normal;
   color: white;
-  padding: 3px 7px;
+  padding: 5px 7px;
   width: fit-content;
   border-radius: 3px;
+}
+#load-more {
+  margin: 50px;
+  width: 100px;
+  height: 55px;
+  background-color: #d55140;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+#load-more:hover {
+  background-color: #666c72;
+}
+#load-more:disabled {
+  background-color: #666c72;
+  cursor: none;
+}
+footer {
+  height: 570px;
+  background-color: black;
 }

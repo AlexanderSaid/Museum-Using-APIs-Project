@@ -39,12 +39,13 @@ function createItemInfoElement(artwork) {
   const artworkInfoContainer = document.createElement("div");
   artworkInfoContainer.classList.add("artwork-info-container");
   const titleContainer = document.createElement("div");
-  titleContainer.classList.add("artwork-title");
+  titleContainer.classList.add("title-container");
   const title = document.createElement("a");
   titleContainer.appendChild(title);
   title.href = artwork.objectURL;
   title.textContent = artwork.title;
   title.target = "_blank";
+  title.classList.add('artwork-title')
   const info = document.createElement("div");
   info.classList.add("info");
   const date = document.createElement("p");

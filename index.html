@@ -6,19 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./public/style.css" />
     <title>Rijks-Met Collaboration</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <main>
-      <form id="query-form">
-        <input
-          type="text"
-          id="main-term"
-          placeholder="Add a keyword to search ..."
+    <header>
+      <nav>
+        <ul class="nav-links left-links">
+          <li class="link-icon">
+            <a href="#" class="material-icons">menu</a>
+          </li>
+          <li class="link-icon">
+            <a href="#" class="material-icons">search</a>
+          </li>
+          <li class="nav-button nav-button-home">
+            <a href="#"
+              ><span class="material-icons">chevron_left</span>Home</a
+            >
+          </li>
+        </ul>
+        <ul class="nav-links">
+          <li class="link"><a href="#">Language</a></li>
+          <li class="link"><a href="#">Login</a></li>
+          <li class="link"><a href="#">Giftshop</a></li>
+          <li class="nav-button nav-button-tickets">
+            <a href="#">Tickets</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="rijks-met-container">
+        <img
+          class="rijks-logo"
+          src="./public/images/rijksmuseum-white.svg"
+          alt="Rijksmuseum logo"
         />
-        <input type="submit" id="search-button" class="button" value="Search" />
-      </form>
+        <img
+          class="and-symbol"
+          src="./public/images/NicePng_ampersand-png_1619241.png"
+          alt="& symbol"
+        />
+        <img
+          class="met-logo"
+          src="./public/images/customer_themet.png"
+          alt="The Metropolitan Museum logo"
+        />
+      </div>
+    </header>
+    <main>
+      <section id="search-container">
+        <form id="search-form">
+          <input
+            type="text"
+            id="main-term"
+            placeholder="Add a keyword to search ..."
+            autocomplete="off";
+          />
+          <input
+            type="submit"
+            id="search-button"
+            class="button"
+            value="Search"
+          />
+        </form>
+      </section>
       <section id="search-results"></section>
     </main>
+    <footer></footer>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
