@@ -3,9 +3,9 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-  src: url("https://rijks-web-2012.azureedge.net/v-15f9886faef52c3c8edc26805f6d445e/WebStatic/Fonts/Rijksmuseum-Normal.woff2")
+  src: "./Rijks-fonts/Rijksmuseum-Normal.woff2"
       format("woff2"),
-    url("https://rijks-web-2012.azureedge.net/v-6088fca1293f7aa2e1de3bb82bbbee13/WebStatic/Fonts/Rijksmuseum-Normal.woff")
+      "./Rijks-fonts/Rijksmuseum-Normal.woff"
       format("woff");
 }
 @font-face {
@@ -13,9 +13,9 @@
   font-weight: bold;
   font-style: normal;
   font-display: swap;
-  src: url("https://rijks-web-2012.azureedge.net/v-b20fc1732520a2948ce209326b4e1367/WebStatic/Fonts/Rijksmuseum-Bold.woff2")
+  src: "./Rijks-fonts/Rijksmuseum-Bold.woff2"
       format("woff2"),
-    url("https://rijks-web-2012.azureedge.net/v-bee6c69ccdea5ecffe660ab37692eac8/WebStatic/Fonts/Rijksmuseum-Bold.woff")
+      "./Rijks-fonts/Rijksmuseum-Bold.woff"
       format("woff");
 }
 * {
