@@ -1,60 +1,86 @@
-"use strict";
-import { setSearchFocus, setUpInputField } from "./searchForm.js";
+'use strict';
+import { setSearchFocus, setUpInputField } from './searchForm.js';
 import {
+  fetchData,
   getSearchTerm,
-  getRawData,
-  retrieveResults,
-  leftResultsArray,
-} from "./dataFunctions.js";
+  getArtworkIDs as getArtworkObjectIDs,
+  processArtworks,
+} from './dataFunctions.js';
 import {
   clearSearchResults,
-  createResultsElement,
-  createLoadMoreButton,
+  createResultsElement as renderResults,
   createNoResultsMessage,
-} from "./resultsView.js";
+  createErrorMessage,
+} from './resultsView.js';
+
+const SLICE_SIZE = 10;
+
+function createLoadMoreButton(onClick) {
+  const mainElement = document.querySelector('main');
+  const loadMoreButton = document.createElement('button');
+  loadMoreButton.id = 'load-more';
+  loadMoreButton.classList.add('button');
+  loadMoreButton.textContent = 'Show More';
+  mainElement.appendChild(loadMoreButton);
+  loadMoreButton.addEventListener('click', onClick);
+}
 
 async function processTheSearch() {
   const searchTerm = getSearchTerm();
   if (!searchTerm) return;
-  const totalResults = await getRawData(searchTerm);
-  if (!totalResults) {
+  const { objectIDs } = await getArtworkObjectIDs(searchTerm);
+  if (objectIDs.length === 0) {
     createNoResultsMessage();
     return;
   }
-  const resultsArray = await retrieveResults();
-  if (resultsArray) {
-    createResultsElement(resultsArray);
-    createLoadMoreButton();
-  }
+
+  const getArtworksPage = async () => {
+    const loadMoreButton = document.getElementById('load-more');
+    if (loadMoreButton) {
+      loadMoreButton.remove();
+    }
+
+    const currentObjectIDs = objectIDs.splice(0, SLICE_SIZE);
+
+    try {
+      const promises = currentObjectIDs.map((id) => {
+        const itemURL = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`;
+        return fetchData(itemURL);
+      });
+
+      const artworks = await Promise.all(promises);
+      const results = processArtworks(artworks);
+
+      if (results.length > 0) {
+        renderResults(results);
+      }
+
+      const hasMore = objectIDs.length > 0;
+      if (hasMore) {
+        createLoadMoreButton(getArtworksPage);
+      }
+    } catch (error) {
+      createErrorMessage(error);
+    }
+  };
+
+  // Display the first page
+  getArtworksPage();
 }
 
 function submitTheSearch(event) {
   event.preventDefault();
-  leftResultsArray.length = 0;
-  const searchButton = document.getElementById("search-button");
-  searchButton.setAttribute("disabled", "disabled");
+  const searchButton = document.getElementById('search-button');
+  searchButton.setAttribute('disabled', 'disabled');
   clearSearchResults();
   processTheSearch();
 }
 
-export async function loadMoreResults() {
-  const moreResultsArray = await retrieveResults();
-  if (moreResultsArray.length) {
-    createResultsElement(moreResultsArray);
-  }
-
-  if (!leftResultsArray.length) {
-    const loadMoreButton = document.getElementById("load-more");
-    loadMoreButton.setAttribute("disabled", "disabled");
-    loadMoreButton.textContent = 'No more results';
-  }
-}
-
 function initApp() {
   setSearchFocus();
-  const form = document.querySelector("#search-form");
-  form.addEventListener("submit", submitTheSearch);
+  const form = document.querySelector('#search-form');
+  form.addEventListener('submit', submitTheSearch);
   setUpInputField();
 }
 
-window.addEventListener("load", initApp);
+window.addEventListener('load', initApp);
