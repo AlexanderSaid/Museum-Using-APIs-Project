@@ -4,7 +4,8 @@
   font-style: normal;
   font-display: swap;
   src: "./Rijks-fonts/Rijksmuseum-Normal.woff2" format("woff2"),
-    "./Rijks-fonts/Rijksmuseum-Normal.woff" format("woff");
+    "./Rijks-fonts/Rijksmuseum-Normal.woff" format("woff"),
+    './Rijks-fonts/Rijksmuseum-Normal.ttf' format('truetype');
 }
 
 @font-face {
@@ -13,18 +14,24 @@
   font-style: normal;
   font-display: swap;
   src: "./Rijks-fonts/Rijksmuseum-Bold.woff2" format("woff2"),
-    "./Rijks-fonts/Rijksmuseum-Bold.woff" format("woff");
+    "./Rijks-fonts/Rijksmuseum-Bold.woff" format("woff"),
+    './Rijks-fonts/Rijksmuseum-Bold.ttf' format('truetype');
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: RijksText;
+  font-family: 'RijksText, arial';
 }
 
+html, body{
+  height: 100%;
+}
 body {
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .material-icons {
@@ -58,11 +65,12 @@ header {
 }
 
 main {
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 500px;
+  margin-bottom: 2rem;
 }
 
 nav,
@@ -361,6 +369,9 @@ a {
 }
 
 footer {
-  height: 570px;
+  flex-shrink: 0;
+  height: 50px;
+  width: 100%;
   background-color: black;
+  margin-top: 2rem;
 }
