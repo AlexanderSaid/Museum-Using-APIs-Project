@@ -8,11 +8,7 @@ I've built this app as a student in [HYF](https://github.com/HackYourFuture) for
 ## <p align='center'>Demo</p>
 
 ---
-
-
-![Museum-API-demo](public/demo/Museum-API-demo.gif)
-[Try it here](https://alexandersaid.github.io/Museum-Using-APIs-Project/)
-
+<p align="center"><img src="public/demo/Museum-API-demo.gif" width='600' height='600'></p>
 
 ---
 ### <p align="center">Techs</p>
